@@ -1,5 +1,14 @@
 module SfxTree where
 
+type SForest a = [SfxTree a]
+
+data SfxTree a =
+  SNode {
+    ev :: a ,  -- edgeValue
+    frst :: SForest a  -- forest
+  }
+  deriving Show
+
 -- get the tail part of a string using "tail [a]" function
 
 --whether  arg strA is the substring of arg strB
@@ -19,3 +28,8 @@ ipc_helper (x:xs) (y:ys) i
 
 ipc :: String -> String -> Int
 ipc a b = ipc_helper a b 0
+
+hasOneChild :: SfxTree a -> Bool
+hasOneChild (SNode x ft)
+  | length ft == 1 = True
+  | otherwise = False
