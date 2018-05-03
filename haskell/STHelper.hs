@@ -33,3 +33,7 @@ hasOneChild :: SfxTree a -> Bool
 hasOneChild (SNode x ft)
   | length ft == 1 = True
   | otherwise = False
+
+compress' :: SfxTree String -> SfxTree String
+compress' (SNode (s:ss) [ st ]) = SNode ((s:ss) ++ (ev st)) (frst st)
+compress' (SNode s (t:ts)) = (SNode s (map compress' (t:ts)))
