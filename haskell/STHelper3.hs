@@ -58,3 +58,9 @@ inside s (Root (t:ts)) = if s == (getV t) then True else inside s (Root ts)
 inside s (Node a []) = False
 inside s (Node a (t:ts)) = if s == (getV t) then True else inside s (Node a ts)
 
+-- e.g. "abaaba": a , ba , aba , aaba , baaba , abaaba (developing...)
+insert :: String -> Tree String -> Tree String
+insert "" (Root []) = undefined
+insert [c] (Root []) = Root [Leaf [c]]
+insert s (Root []) = undefined
+insert s (Root b) = Root $ map (insert s) b
