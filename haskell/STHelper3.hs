@@ -27,9 +27,9 @@ main = do
 
 -- get the string value of the tree
 getV :: Tree String -> String
-getV (Root l) = ""
+getV (Root b) = undefined
 getV (Leaf a) = a
-getV (Node a l) = a
+getV (Node a b) = a
 
 -- extract the first of the string
 -- extract the tail part of the string using the function "tail"
@@ -49,4 +49,12 @@ compare' "" t = False
 compare' s (Root b) = False
 compare' s (Node a b) = if (head' s) == a then True else False
 compare' s (Leaf a) = if (head' s) == a then True else False
+
+-- whether or not in the forest
+inside :: String -> Tree String -> Bool
+inside "" t = undefined
+inside s (Root []) = False
+inside s (Root (t:ts)) = if s == (getV t) then True else inside s (Root ts)
+inside s (Node a []) = False
+inside s (Node a (t:ts)) = if s == (getV t) then True else inside s (Node a ts)
 
